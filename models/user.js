@@ -33,10 +33,10 @@ module.exports = (sequelize, DataTypes) => {
   });
   user.associate = function(models) {
     user.hasMany(models.alarm, {
-      foreignKey: 'alarm_id'
+      foreignKey: 'user_id'
     });
     user.hasMany(models.feed, {
-      foreignKey: 'feed_id'
+      foreignKey: 'user_id'
     });
   };
   return user;

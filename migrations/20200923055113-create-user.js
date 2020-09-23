@@ -31,12 +31,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      alarm_id: {
-        type: Sequelize.INTEGER
-      },
-      feed_id: {
-        type: Sequelize.INTEGER
-      }
     });
   },
   down: async (queryInterface, Sequelize) => {

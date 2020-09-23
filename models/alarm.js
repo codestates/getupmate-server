@@ -21,9 +21,9 @@ module.exports = (sequelize, DataTypes) => {
   });
   alarm.associate = function(models) {
     alarm.belongsTo(models.user, {
-      foreignKey: 'alarm_id'
+      foreignKey: 'user_id'
     });
-    alarm.hasOne(models.mission, {
+    alarm.belongsTo(models.mission, {
       foreignKey: 'mission_id'
     });
     alarm.belongsTo(models.feed, {
