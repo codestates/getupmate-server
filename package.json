@@ -1,0 +1,19 @@
+{
+  "name": "im22project5-server",
+  "version": "1.0.0",
+  "description": "server branch test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bapbodanbbang/im22project5-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bapbodanbbang/im22project5-server/issues"
+  },
+  "homepage": "https://github.com/bapbodanbbang/im22project5-server#readme"
+}
