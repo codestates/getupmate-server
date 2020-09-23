@@ -22,7 +22,7 @@ module.exports = {
       alarm_id: {
         type: Sequelize.INTEGER
       },
-      mission_id: {
+      user_id: {
         type: Sequelize.INTEGER
       }
     });

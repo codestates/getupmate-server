@@ -21,10 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'mission',
   });
   mission.associate = function(models) {
-    mission.belongsTo(models.alarm, {
-      foreignKey: 'mission_id'
-    });
-    mission.belongsTo(models.feed, {
+    mission.hasMany(models.alarm, {
       foreignKey: 'mission_id'
     });
   };

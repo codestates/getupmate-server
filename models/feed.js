@@ -21,13 +21,10 @@ module.exports = (sequelize, DataTypes) => {
   });
   feed.associate = function(models) {
     feed.belongsTo(models.user, {
-      foreignKey: 'feed_id'
+      foreignKey: 'user_id'
     });
     feed.hasOne(models.alarm, {
       foreignKey: 'alarm_id'
-    });
-    feed.hasOne(models.mission, {
-      foreignKey: 'mission_id'
     });
   };
   return feed;

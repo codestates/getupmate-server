@@ -21,6 +21,9 @@ module.exports = {
       },
       mission_id: {
         type: Sequelize.INTEGER
+      },
+      user_id: {
+        type: Sequelize.INTEGER
       }
     });
   },
