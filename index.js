@@ -6,6 +6,7 @@ const body_parser = require('body-parser');
 const dotenv = require('dotenv');
 
 //.gitignore 다시 한번 보기
+// branch 분기 테스트하기!
 
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
