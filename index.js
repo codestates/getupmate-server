@@ -4,6 +4,7 @@ const cors = require('cors');
 const cookie_parser = require('cookie-parser');
 const body_parser = require('body-parser');
 const dotenv = require('dotenv');
+dotenv.config();
 
 //.gitignore 다시 한번 보기
 
