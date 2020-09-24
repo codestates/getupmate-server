@@ -11,6 +11,13 @@ const userRouter = require('./routes/user');
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors());
+app.use(
+  express_session({
+    secret : "getupmate",
+    resave : false,
+    saveUninitialized : true,
+  })
+)
 dotenv.config();
 
 app.get('/', (req, res) => {
