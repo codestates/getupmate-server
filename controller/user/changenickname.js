@@ -1,7 +1,7 @@
 const { user } = require('../../models');
 
 module.exports = {
-  post: async (req, res) => {
+  change: async (req, res) => {
     const userid = req.params.id;
     const { nickname } = req.body;
     await user
