@@ -24,7 +24,7 @@ module.exports = {
             email : new_email,
             password : new_passowrd
         }).then(result => {
-            res.status(201);4
+            res.status(201);
             res.send(result.dataValues);
         })
     }
