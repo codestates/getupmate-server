@@ -13,11 +13,19 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(
   express_session({
+<<<<<<< HEAD
     secret: "getupmate",
     resave: false,
     saveUninitialized: true,
   })
 );
+=======
+    secret : "getupmate",
+    resave : false,
+    saveUninitialized : true,
+  })
+)
+>>>>>>> 0b321e5bd4a9e73759d0769a67168b7c93a88d2f
 dotenv.config();
 
 app.get('/', (req, res) => {
