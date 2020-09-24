@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    photo: DataTypes.BLOB
+    photo: DataTypes.BLOB 
   }, {
     sequelize,
     modelName: 'user',
