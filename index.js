@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
 const userRouter = require('./routes/user');
+const alarmRouter = require('./routes/alarm');
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/user', userRouter);
+app.use('/alarm', alarmRouter);
   
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
