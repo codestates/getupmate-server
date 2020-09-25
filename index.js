@@ -9,6 +9,7 @@ const port = process.env.SERVER_PORT || 3000;
 const userRouter = require('./routes/user');
 const passport = require("passport");
 const passportConfig = require("./controller/user/passport.js");
+const alarmRouter = require('./routes/alarm');
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -43,6 +44,8 @@ app.get("/signin", async (req, res) => {
   return res.status(200).send(`Login Page!`);
 });
 
+app.use('/alarm', alarmRouter);
+  
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`)
 })
