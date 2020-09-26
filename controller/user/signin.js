@@ -16,7 +16,7 @@ module.exports = {
           res.status(401).send("Unauthorized")
         } else {
           sess.userid = result.id;
-          res.status(200).json({ id: result.id });
+          res.status(200).json(result);
         }
       })
       .catch(err => {
