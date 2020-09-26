@@ -12,8 +12,18 @@ module.exports = {
           id: userid
         }
       })
-      .then(result => {
-        res.status(200).json(result)
+      .then(() => {
+        async function findUser () {
+          await user.findOne({
+            where : {
+              id : userid,
+              nickname : nickname
+            }
+          }).then(data => {
+            res.status(200).json(data)
+          })
+        }
+        findUser();
       })
       .catch(err => {
         res.status(400).send(err);

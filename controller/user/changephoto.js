@@ -5,19 +5,29 @@ const { user } = require('../../models');
 module.exports = {
     change: async (req, res) => {
         const getPhoto = req.body;
-        const params = req.params.id;
-        const session_id = req.session.userid;
-        if(params){
+        const userid = req.params.id;
+        if(userid){
             await user.update(
                 { photo : getPhoto },
                 {
                     where : {
-                        id : params
+                        id : userid
+                    }
+                }).then(() => {
+                async function findUser () {
+                    await user.findOne({
+                      where : {
+                        id : userid,
+                      }
+                    }).then(data => {
+                      res.status(200).json(data)
+                    })
                 }
-            }).then(result => {
-                res.status(200);
-                res.send(result);
+                findUser();
             })
+            .catch(err => {
+                res.status(400).send(err);
+            });
         }
         else{
             res.status(400);

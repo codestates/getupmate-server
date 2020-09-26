@@ -13,7 +13,7 @@ const alarmRouter = require('./routes/alarm');
 
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors( { origin : '*' } ));
 app.use(
   express_session({
     secret: "getupmate",
