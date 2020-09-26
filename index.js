@@ -20,7 +20,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
   })
-  );
+);
 app.use(passport.initialize());
 app.use('/user', userRouter);
 app.use("/auth", require("./routes/user"));
@@ -39,10 +39,6 @@ dotenv.config();
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
-
-app.get("/signin", async (req, res) => {
-  return res.status(200).send(`Login Page!`);
-});
 
 app.use('/alarm', alarmRouter);
   
