@@ -5,14 +5,8 @@ module.exports = {
     const sess = req.session;
     if(sess.userid) {
       req.session.destroy(err => {
-        if(err) {
-          console.log(err);
-        } else {
-          res.redirect('/signin');
-        }
+        console.log(err)
       })
-    } else {
-      res.redirect('/signin');
     }
   },
 };
