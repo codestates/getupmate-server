@@ -11,12 +11,8 @@ module.exports = {
           id: userid
         }
       })
-<<<<<<< HEAD
-      .then(() => {
-=======
       .then(result => {
         console.log(result)
->>>>>>> 25861d2b780d36593457bb054a14222a478c3e6b
         async function findUser () {
           await user.findOne({
             where : {
@@ -24,10 +20,7 @@ module.exports = {
               nickname : nickname
             }
           }).then(data => {
-<<<<<<< HEAD
-=======
             console.log(data)
->>>>>>> 25861d2b780d36593457bb054a14222a478c3e6b
             res.status(200).json(data)
           })
         }
