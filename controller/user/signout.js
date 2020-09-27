@@ -1,4 +1,4 @@
-const { user } = require('../../models');
+
 module.exports = {
   post: async (req, res) => {
     await req.session.destroy(function(){ 
