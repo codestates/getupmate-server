@@ -11,6 +11,17 @@ const passport = require("passport");
 const passportConfig = require("./controller/user/passport.js");
 const alarmRouter = require('./routes/alarm');
 
+//test session sustain
+const mysqlStore = require('express-mysql-session')(express_session);
+const options = {
+  host : 'get-up-mate.cngyocisb343.ap-northeast-2.rds.amazonaws.com',
+  port : 3322,
+  user : 'admin',
+  password : 'getupmate1',
+  database : 'getupmate'
+};
+const sessionStorage = new mysqlStore(options);
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors( { origin : '*' } ));
@@ -19,8 +30,16 @@ app.use(
     secret: "getupmate",
     resave: false,
     saveUninitialized: true,
+    //testing --start
+    store: sessionStorage,
+    cookie: {
+      domain : 'http://get-up-mate.s3-website.ap-northeast-2.amazonaws.com/',
+      expires : new Date(Date.now() + (20000)),
+      // secure : true
+    }
+    // --end
   })
-  );
+);
 app.use(passport.initialize());
 app.use('/user', userRouter);
 app.use("/auth", require("./routes/user"));
@@ -39,10 +58,6 @@ dotenv.config();
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
-
-app.get("/signin", async (req, res) => {
-  return res.status(200).send(`Login Page!`);
-});
 
 app.use('/alarm', alarmRouter);
   

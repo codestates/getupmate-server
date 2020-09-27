@@ -1,7 +1,5 @@
 const { user } = require('../../models');
-
 //수정 필요!
-
 module.exports = {
     change: async (req, res) => {
         const getPhoto = req.body;
