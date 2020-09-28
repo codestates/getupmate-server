@@ -37,8 +37,8 @@ router.post('/changenickname/:id', ChangeNickname.change);
 
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/signin" }),
-  async (req, res) => {
-    res.redirect("/mypage");
+  (req, res) => {
+    res.redirect("/");
   }
 );
 

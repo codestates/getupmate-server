@@ -1,4 +1,4 @@
-const { user } = require('../../models');
+// const { user } = require('../../models');
 const { alarm } = require('../../models');
 const { mission } = require('../../models');
 
@@ -7,9 +7,9 @@ const { mission } = require('../../models');
 module.exports = {
     get : async (req,res) => {
         //1. session_id와 동일한 id를 가진 알람을 alarm table에서 모두 가져온다.
-        const session_id = req.params.id;
-        // const session_id = 3; // 임의의 userid값으로 test실행
-        console.log('req : ',req);
+        // const session_id = req.session.userid;
+        const session_id = req.params.id; // 임의의 userid값으로 test실행
+        // console.log('req : ',req);
         await alarm.findAll({
             where : {
                 user_id : session_id
@@ -21,9 +21,10 @@ module.exports = {
     },
 
     post : async (req,res) => {
-        const { time,question } = req.body;
-        // const session_id = 3; // 임의의 userid값으로 test실행
-        const session_id = req.params.id;
+        const { time, question } = req.body;
+        const session_id = req.params.id; // 임의의 userid값으로 test실행
+        // console.log('session_id', session_id)
+        // const session_id = req.session.userid;
         // console.log('req.session : ',req.session);
         //1. mission table에서 { mission }과 같은 미션의 id를 알아내서 mission_id에 넣는다.
         const mission_result = await mission.findOne({
