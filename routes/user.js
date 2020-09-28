@@ -32,7 +32,7 @@ router.post('/signin', Signin.post);
 router.post('/signup', Signup.post);
 router.post('/signout', Signout.post);
 router.post('/searchuser', SearchUser.search);
-router.post('/changephoto/:id', upload.single('file') ,ChangePhoto.change);
+router.post('/changephoto/:id', upload.single('photo') ,ChangePhoto.change);
 router.post('/changenickname/:id', ChangeNickname.change);
 
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
