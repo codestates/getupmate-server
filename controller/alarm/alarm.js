@@ -54,17 +54,19 @@ module.exports = {
     },
 
     delete : async (req,res) => {
-        const session_id = req.session.userid;
+        const session_id = req.params.id;
         // const session_id = 3; // 임의의 userid값으로 test실행
-        const alarm_id = req.body.alarm_id;
-
+        const id = req.query.id;
+        console.log(req.query.id)
+        
         await alarm.destroy({
             where : {
-                id : alarm_id,
+                id : id,
                 user_id : session_id
             }
         }).then(result => {
+          console.log(result)
             res.status(200).send("successfully deleted")
-        }).catch(err => res.status(500).send("server error : ",err))
+        }).catch(err => res.status(500).send(err))
     }
 }
