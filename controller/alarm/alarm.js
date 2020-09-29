@@ -21,7 +21,7 @@ module.exports = {
     },
 
     post : async (req,res) => {
-        const { time, question } = req.body;
+        const { time, type, difficulty } = req.body;
         const session_id = req.params.id; // 임의의 userid값으로 test실행
         // console.log('session_id', session_id)
         // const session_id = req.session.userid;
@@ -29,7 +29,8 @@ module.exports = {
         //1. mission table에서 { mission }과 같은 미션의 id를 알아내서 mission_id에 넣는다.
         const mission_result = await mission.findOne({
             where : {
-                question : question
+                type: type,
+                difficulty: difficulty,
             }
         });
 

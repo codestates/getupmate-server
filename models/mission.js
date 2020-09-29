@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   mission.init({
+    type: DataTypes.STRING,
+    difficulty: DataTypes.STRING,
     question: DataTypes.STRING,
     answer: DataTypes.STRING
   }, {
