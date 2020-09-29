@@ -42,6 +42,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use('/user', userRouter);
+app.use('/img', express.static(__dirname+'/uploads/images'));
 app.use('/alarm', alarmRouter);
 app.use("/auth", require("./routes/user"));
 // app.use(passport.express_session());
