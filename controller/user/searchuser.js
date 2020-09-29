@@ -11,15 +11,20 @@ module.exports = {
         const userList = await user.findAll({
             where : {
                 [OP.or] : [
-                    {nickname :{[OP.like] : `%${data}%`}}, 
+                    {nickname :{[OP.like] : `%chaeryn%`}}, 
                     {email : {[OP.like] : `%${data}%`}}
                 ]
             }
         })
+        // console.log(userList[0].dataValues)
+        delete userList[0].dataValues.password
+        delete userList[0].dataValues.createdAt
+        delete userList[0].dataValues.updatedAt
+        console.log(userList[0].dataValues)
 
         if(userList !== null){
             res.status(200);
-            res.send(userList);
+            res.send(userList[0].dataValues);
         }else{
             res.status(404);
             res.send("no user");
