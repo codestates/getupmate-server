@@ -1,17 +1,38 @@
+//Server Setting
 const express = require('express');
 const express_session = require('express-session');
+const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+const port = process.env.SERVER_PORT || 4000;
+
+//Enviroment Setting
 const cors = require('cors');
+const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
-const app = express();
-const port = process.env.SERVER_PORT || 3000;
-const userRouter = require('./routes/user');
+dotenv.config();
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(cors( { origin : '*' } ));
+
+//Passport - Social Login
 const passport = require("passport");
 const passportConfig = require("./controller/user/passport.js");
-const alarmRouter = require('./routes/alarm');
+passportConfig();
+app.use(passport.initialize());
+app.use("/auth", require("./routes/user"));
 
-//test session sustain
+//Router
+const userRouter = require('./routes/user');
+const alarmRouter = require('./routes/alarm');
+const feedRouter = require('./routes/feed');
+app.use('/upload', express.static(__dirname+'/uploads/images'));
+app.use('/user', userRouter);
+app.use('/alarm', alarmRouter);
+app.use('/feed', feedRouter);
+
+//session storage
 const mysqlStore = require('express-mysql-session')(express_session);
 const options = {
   host : 'get-up-mate.cngyocisb343.ap-northeast-2.rds.amazonaws.com',
@@ -21,10 +42,6 @@ const options = {
   database : 'getupmate'
 };
 const sessionStorage = new mysqlStore(options);
-
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(cors( { origin : '*' } ));
 app.use(
   express_session({
     secret: "getupmate",
@@ -40,30 +57,31 @@ app.use(
     // --end
   })
 );
-app.use(passport.initialize());
-app.use('/user', userRouter);
-//change
-app.use('/upload', express.static(__dirname+'/uploads/images'));
-app.use("/auth", require("./routes/user"));
-// app.use(passport.express_session());
-passportConfig();
-dotenv.config();
 
-// 구글 로그인 테스트를 위한 index.html 랜더링(client에서 버튼 만들어지면 없앨 예정)
-// app.set('views', __dirname + '/views');
-// app.set('view engine', 'ejs');
-// app.engine('html', require('ejs').renderFile);
-// app.get('/',function(req,res){
-//   res.render('index.html');
-// });
+//io execute
+io.on('connection', (socket) => {
+  console.log('user connect socket.io');
+  socket.on('init', (msg) => {
+    console.log('init!',msg);
+  })
+  socket.on('feed message', (feed) => {
+    io.emit('feed message', feed);
+  })
+  socket.on('welcome', (msg) => {
+    console.log(msg);
+  })
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+})
 
+//Home
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
-
-app.use('/alarm', alarmRouter);
   
-app.listen(port, () => {
+//Server port listen
+http.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`)
 })
 
