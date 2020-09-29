@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "admin",
-    "password": null,
+    "password": "getupmate1",
     "database": "getupmate",
     "host": "get-up-mate.cngyocisb343.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",

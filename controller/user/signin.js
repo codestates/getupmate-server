@@ -13,25 +13,21 @@ module.exports = {
         }
       })
       .then(result => {
+        console.log('result : ',result.dataValues);
         if(result === null) {
           res.status(401).send("Unauthorized")
         } else {
           sess.userid = result.id;
-          //test --start
-          // console.log(req.session);
-          /*
-          Session {                                                                 │
-            ││ index >   cookie:                                                                 │
-            ││ index >    { path: '/',                                                           │
-            ││ index >      _expires: 2020-09-26T13:12:30.032Z,                                  │
-            ││ index >      originalMaxAge: -45803,                                              │
-            ││ index >      httpOnly: true },                                                    │
-            ││ index >   userid: 13 }      
-          */
           sess.save(function () {
-            res.status(200).json(result);
+            res.status(200).json({
+              "id": result.id,
+              "nickname": result.nickname,
+              "password": result.password,
+              "email": result.email,
+              "createdAt": result.createdAt,
+              "updatedAt": result.updatedAt
+            });
           })
-          // --end
         }
       })
       .catch(err => {
