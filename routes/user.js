@@ -40,7 +40,7 @@ router.post('/changenickname/:id', ChangeNickname.change);
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/signin" }),
   (req, res) => {
-    res.redirect("/home");
+    res.redirect("http://get-up-mate.s3-website.ap-northeast-2.amazonaws.com/home");
   }
 );
 
