@@ -10,6 +10,7 @@ const userRouter = require('./routes/user');
 const passport = require("passport");
 const passportConfig = require("./controller/user/passport.js");
 const alarmRouter = require('./routes/alarm');
+const missionRouter = require('./routes/mission');
 
 //test session sustain
 const mysqlStore = require('express-mysql-session')(express_session);
@@ -44,6 +45,7 @@ app.use(passport.initialize());
 app.use('/user', userRouter);
 app.use('/img', express.static(__dirname+'/uploads/images'));
 app.use('/alarm', alarmRouter);
+app.use('/mission', missionRouter);
 app.use("/auth", require("./routes/user"));
 // app.use(passport.express_session());
 passportConfig();
