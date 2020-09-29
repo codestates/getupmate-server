@@ -49,12 +49,12 @@ passportConfig();
 dotenv.config();
 
 // 구글 로그인 테스트를 위한 index.html 랜더링(client에서 버튼 만들어지면 없앨 예정)
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
-app.get('/',function(req,res){
-  res.render('index.html');
-});
+// app.set('views', __dirname + '/views');
+// app.set('view engine', 'ejs');
+// app.engine('html', require('ejs').renderFile);
+// app.get('/',function(req,res){
+//   res.render('index.html');
+// });
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
