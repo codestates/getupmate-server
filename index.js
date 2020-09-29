@@ -42,6 +42,8 @@ app.use(
 );
 app.use(passport.initialize());
 app.use('/user', userRouter);
+//change
+app.use('/upload', express.static(__dirname+'/uploads/images'));
 app.use("/auth", require("./routes/user"));
 // app.use(passport.express_session());
 passportConfig();

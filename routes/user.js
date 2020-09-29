@@ -6,7 +6,8 @@ const multer  = require('multer');
 const storage = multer.diskStorage({
   destination : function (req, file, cb) {
     if (file.mimetype == "image/jpeg" || file.mimetype == "image/jpg" || file.mimetype == "image/png") {
-      console.log(req.file)
+      console.log('req.file : ',req.file)
+      console.log('req.params : ',req.params);
       cb(null, 'uploads/images')
       //텍스트 파일이면
     } else if (file.mimetype == "application/pdf" || file.mimetype == "application/txt" || file.mimetype == "application/octet-stream") {
@@ -15,7 +16,8 @@ const storage = multer.diskStorage({
     }
   },
   filename: function (req, file, cb) {
-    cb(null,file.originalname) //  Date.now() + "-" + file.originalname --> file.originalname
+    //changed
+    cb(null,req.params.id+"-photo.jpeg"); // ex) 13-photo
   }
 })
 const upload = multer({ storage: storage });
@@ -32,7 +34,7 @@ router.post('/signin', Signin.post);
 router.post('/signup', Signup.post);
 router.post('/signout', Signout.post);
 router.post('/searchuser', SearchUser.search);
-router.post('/changephoto/:id', upload.single('file') ,ChangePhoto.change);
+router.post('/changephoto/:id', upload.single('photo') ,ChangePhoto.change);
 router.post('/changenickname/:id', ChangeNickname.change);
 
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
