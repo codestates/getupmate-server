@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
+const missionRouter = require('./routes/mission');
 const userRouter = require('./routes/user');
 const feedRouter = require('./routes/feed');
 const passport = require("passport");
@@ -42,6 +43,7 @@ app.use(
   })
 );
 app.use(passport.initialize());
+app.use('/mission', missionRouter);
 app.use('/user', userRouter);
 app.use('/alarm', alarmRouter);
 app.use('/feed', feedRouter);
