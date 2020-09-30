@@ -36,6 +36,12 @@ module.exports = (sequelize, DataTypes) => {
     user.hasMany(models.feed, {
       foreignKey: 'user_id'
     });
+    user.hasMany(models.follow, {
+      foreignKey: 'my_id'
+    });
+    user.hasMany(models.follow, {
+      foreignKey: 'friend_id'
+    });
   };
   return user;
 };
