@@ -11,7 +11,7 @@ module.exports = {
         const userList = await user.findAll({
             where : {
                 [OP.or] : [
-                    {nickname :{[OP.like] : `%chae%`}}, 
+                    {nickname :{[OP.like] : `%${data}%`}}, 
                     {email : {[OP.like] : `%${data}%`}}
                 ]
             }
