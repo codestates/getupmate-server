@@ -46,7 +46,7 @@ async function find_friends_feed(friend_id){
         obj.text = element.dataValues.text;
         obj.time = element.dataValues.createdAt;
         obj.nickname = nickname.nickname;
-        obj.photo = `http://www.gijigae.com:3000/upload/${element.dataValues.id}-photo.jpeg`
+        obj.photo = `http://www.gijigae.com:3000/upload/${nickname.id}-photo.jpeg`
 
         result.push(obj);
     }
