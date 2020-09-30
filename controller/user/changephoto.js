@@ -13,7 +13,11 @@ module.exports = {
                     id : userid
                 }
             }).then(() => {
-            res.status(200).send('successfully updated');
+            req.session.photo = `http://www.gijigae.com:3000/upload/${nickname.id}-photo.jpeg`;
+            req.session.save(() => {
+                res.status(200).send('successfully updated');
+                res.redirect('http://get-up-mate.s3-website.ap-northeast-2.amazonaws.com/mypage')
+            })
         })
         .catch(err => {
             res.status(400).send(err);
