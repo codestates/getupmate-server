@@ -34,7 +34,7 @@ async function friends_info(friend_id){
     obj.id = el.dataValues.id;
     obj.nickname = el.dataValues.nickname;
     obj.email = el.dataValues.email;
-    obj.photo = el.dataValues.photo;
+    obj.photo = `http://www.gijigae.com:3000/upload/${el.dataValues.id}-photo.jpeg`;
 
     result.push(obj);
   }
