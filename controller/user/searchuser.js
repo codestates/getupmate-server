@@ -11,7 +11,7 @@ module.exports = {
         const userList = await user.findAll({
             where : {
                 [OP.or] : [
-                    {nickname :{[OP.like] : `%${data}%`}}, 
+                    {nickname :{[OP.like] : `%chae%`}}, 
                     {email : {[OP.like] : `%${data}%`}}
                 ]
             }
@@ -23,6 +23,7 @@ module.exports = {
             delete element.dataValues.password
             delete element.dataValues.createdAt
             delete element.dataValues.updatedAt
+            element.photo = `http://www.gijigae.com:3000/upload/${element.dataValues.id}-photo.jpeg`
             result.push(element);
         })
         
