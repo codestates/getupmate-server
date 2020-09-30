@@ -3,7 +3,7 @@ const express = require('express');
 const express_session = require('express-session');
 const app = express();
 const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+// const io = require('socket.io')(http);
 const port = process.env.SERVER_PORT || 4000;
 
 //Enviroment Setting
@@ -26,11 +26,14 @@ app.use("/auth", require("./routes/user"));
 //Router
 const userRouter = require('./routes/user');
 const alarmRouter = require('./routes/alarm');
+const missionRouter = require('./routes/mission');
 const feedRouter = require('./routes/feed');
-app.use('/upload', express.static(__dirname+'/uploads/images'));
 app.use('/user', userRouter);
 app.use('/alarm', alarmRouter);
+app.use('/mission', missionRouter);
 app.use('/feed', feedRouter);
+app.use("/auth", require("./routes/user"));
+
 
 //session storage
 const mysqlStore = require('express-mysql-session')(express_session);
@@ -57,23 +60,29 @@ app.use(
     // --end
   })
 );
+app.use(passport.initialize());
+app.use('/upload', express.static(__dirname+'/uploads/images'));
+app.use('/img', express.static(__dirname+'/uploads/images'));
+// app.use(passport.express_session());
+passportConfig();
+dotenv.config();
 
 //io execute
-io.on('connection', (socket) => {
-  console.log('user connect socket.io');
-  socket.on('init', (msg) => {
-    console.log('init!',msg);
-  })
-  socket.on('feed message', (feed) => {
-    io.emit('feed message', feed);
-  })
-  socket.on('welcome', (msg) => {
-    console.log(msg);
-  })
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
-})
+// io.on('connection', (socket) => {
+//   console.log('user connect socket.io');
+//   socket.on('init', (msg) => {
+//     console.log('init!',msg);
+//   })
+//   socket.on('feed message', (feed) => {
+//     io.emit('feed message', feed);
+//   })
+//   socket.on('welcome', (msg) => {
+//     console.log(msg);
+//   })
+//   socket.on('disconnect', () => {
+//     console.log('user disconnected');
+//   });
+// })
 
 //Home
 app.get('/', (req, res) => {
