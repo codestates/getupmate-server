@@ -81,7 +81,7 @@ function quickSort(arr) {
 
 
 module.exports = {
-    getHome : async function (req,res) {
+    gethome : async function (req,res) {
         let friends_list = await find_friends_id(req.params.id)
         let feeds_list = await make_feed_list(friends_list);
 //         const result = findFollowingIdFeeds(my_following_list);
