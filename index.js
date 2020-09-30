@@ -12,6 +12,7 @@ const feedRouter = require('./routes/feed');
 const passport = require("passport");
 const passportConfig = require("./controller/user/passport.js");
 const alarmRouter = require('./routes/alarm');
+const followRouter = require('./routes/follow')
 
 //test session sustain
 const mysqlStore = require('express-mysql-session')(express_session);
@@ -43,6 +44,7 @@ app.use(
   })
 );
 app.use(passport.initialize());
+app.use('/follow', followRouter);
 app.use('/mission', missionRouter);
 app.use('/user', userRouter);
 app.use('/alarm', alarmRouter);
