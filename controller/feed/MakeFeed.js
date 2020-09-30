@@ -1,7 +1,7 @@
 const { feed } = require('../../models');
 
 module.exports = {
-    makeFeed : async function (req,res) {
+    makefeed : async function (req,res) {
         const user_id = req.params.id; //개인 확인 필요
         const text = req.body.text;
         
