@@ -15,7 +15,6 @@ module.exports = {
             }).then(() => {
             req.session.photo = `http://www.gijigae.com:3000/upload/${nickname.id}-photo.jpeg`;
             req.session.save(() => {
-                res.status(200).send('successfully updated');
                 res.redirect('http://get-up-mate.s3-website.ap-northeast-2.amazonaws.com/mypage')
             })
         })
