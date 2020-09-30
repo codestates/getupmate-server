@@ -20,14 +20,14 @@ async function findFollowingIdFeeds(user_info_list) {
 module.exports = {
     getHome : function (req,res) {
         
-        const my_id = req.params.id;
+//         const my_id = req.params.id;
 
-        const my_following_list = await follow.findAll({
-            where : {
-                followed_id : my_id
-            }
-        })
-        const result = findFollowingIdFeeds(my_following_list);
-        res.status(200).send(result);
+//         const my_following_list = await follow.findAll({
+//             where : {
+//                 followed_id : my_id
+//             }
+//         })
+//         const result = findFollowingIdFeeds(my_following_list);
+//         res.status(200).send(result);
     }
 }
