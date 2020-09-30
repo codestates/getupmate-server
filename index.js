@@ -46,6 +46,8 @@ app.use('/user', userRouter);
 app.use('/alarm', alarmRouter);
 app.use('/feed', feedRouter);
 app.use("/auth", require("./routes/user"));
+app.use('/upload', express.static(__dirname+'/uploads/images'));
+app.use('/img', express.static(__dirname+'/uploads/images'));
 // app.use(passport.express_session());
 passportConfig();
 dotenv.config();
