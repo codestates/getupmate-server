@@ -1,6 +1,6 @@
 const { follow } = require('../../models');
 const { user } = require('../../models');
-
+ 
 /*
 1. follow 테이블에서 my_id에 해당하는것을 모두 찾는다.
 2. my_id에 해당하는 모든 row의 friend_id를 가져온다.
