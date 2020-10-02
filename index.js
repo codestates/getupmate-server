@@ -9,8 +9,6 @@ const port = process.env.SERVER_PORT || 3000;
 const missionRouter = require('./routes/mission');
 const userRouter = require('./routes/user');
 const feedRouter = require('./routes/feed');
-const passport = require("passport");
-const passportConfig = require("./controller/user/passport.js");
 const alarmRouter = require('./routes/alarm');
 const followRouter = require('./routes/follow')
 
@@ -43,7 +41,6 @@ app.use(
     // --end
   })
 );
-app.use(passport.initialize());
 app.use('/follow', followRouter);
 app.use('/mission', missionRouter);
 app.use('/user', userRouter);
@@ -52,8 +49,6 @@ app.use('/feed', feedRouter);
 app.use("/auth", require("./routes/user"));
 app.use('/upload', express.static(__dirname+'/uploads/images'));
 app.use('/img', express.static(__dirname+'/uploads/images'));
-app.use(passport.session());
-passportConfig();
 dotenv.config();
 
 // 구글 로그인 테스트를 위한 index.html 랜더링(client에서 버튼 만들어지면 없앨 예정)

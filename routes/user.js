@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const passport = require("passport");
 //add multer
 const multer  = require('multer');
 const storage = multer.diskStorage({
@@ -36,13 +35,5 @@ router.post('/signout', Signout.post);
 router.post('/searchuser', SearchUser.search);
 router.post('/changephoto/:id', upload.single('photo') ,ChangePhoto.change);
 router.post('/changenickname/:id', ChangeNickname.change);
-
-router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
-router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/signin" }),
-  (req, res) => {
-    console.log('req.query : ',req.query)
-    res.redirect("/");
-  }
-);
 
 module.exports = router;
