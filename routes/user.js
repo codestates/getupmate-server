@@ -37,10 +37,16 @@ router.post('/searchuser', SearchUser.search);
 router.post('/changephoto/:id', upload.single('photo') ,ChangePhoto.change);
 router.post('/changenickname/:id', ChangeNickname.change);
 
-router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] })
+);
 router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/signin" }),
   (req, res) => {
-    res.redirect("/home");
+    // console.log("req.user", req.user);
+    // req.session.userid = req.user.dataValues.id;
+    // console.log('req.user.dataValues.id', req.user.dataValues.id)
+    // req.session.save();
+    res.send(req.user)
+    // res.redirect("/");
   }
 );
 

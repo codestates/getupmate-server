@@ -13,6 +13,8 @@ const passport = require("passport");
 const passportConfig = require("./controller/user/passport.js");
 const alarmRouter = require('./routes/alarm');
 const followRouter = require('./routes/follow')
+passportConfig();
+dotenv.config();
 
 //test session sustain
 const mysqlStore = require('express-mysql-session')(session);
@@ -44,6 +46,7 @@ app.use(
   })
 );
 app.use(passport.initialize());
+app.use(passport.session());
 app.use('/follow', followRouter);
 app.use('/mission', missionRouter);
 app.use('/user', userRouter);
@@ -52,9 +55,6 @@ app.use('/feed', feedRouter);
 app.use("/auth", require("./routes/user"));
 app.use('/upload', express.static(__dirname+'/uploads/images'));
 app.use('/img', express.static(__dirname+'/uploads/images'));
-app.use(passport.session());
-passportConfig();
-dotenv.config();
 
 // 구글 로그인 테스트를 위한 index.html 랜더링(client에서 버튼 만들어지면 없앨 예정)
 // app.set('views', __dirname + '/views');
