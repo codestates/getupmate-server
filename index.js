@@ -1,5 +1,5 @@
 const express = require('express');
-const express_session = require('express-session');
+const session = require('express-session');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -15,7 +15,7 @@ const alarmRouter = require('./routes/alarm');
 const followRouter = require('./routes/follow')
 
 //test session sustain
-const mysqlStore = require('express-mysql-session')(express_session);
+const mysqlStore = require('express-mysql-session')(session);
 const options = {
   host : 'get-up-mate.cngyocisb343.ap-northeast-2.rds.amazonaws.com',
   port : 3322,
@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors( { origin : '*' } ));
 app.use(
-  express_session({
+  session({
     secret: "getupmate",
     resave: false,
     saveUninitialized: true,
@@ -52,7 +52,7 @@ app.use('/feed', feedRouter);
 app.use("/auth", require("./routes/user"));
 app.use('/upload', express.static(__dirname+'/uploads/images'));
 app.use('/img', express.static(__dirname+'/uploads/images'));
-// app.use(passport.express_session());
+app.use(passport.session());
 passportConfig();
 dotenv.config();
 

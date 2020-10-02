@@ -12,7 +12,7 @@ async function find_friends_id(my_id){
     })
 
     list.forEach(element => {
-        friends_list.push(element.dataValues.id);
+        friends_list.push(element.dataValues.friend_id);
     })
 
     console.log('friends_list : ',friends_list);
