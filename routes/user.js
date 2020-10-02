@@ -29,9 +29,9 @@ const Signup = require('../controller/user/signup');
 const SearchUser = require('../controller/user/searchuser');
 const ChangePhoto = require('../controller/user/changephoto');
 const ChangeNickname = require('../controller/user/changenickname');
-const GoogleRedirect = require('../controller/user/redirectgoogle');
+const GoogleLogin = require('../controller/user/redirectgoogle');
 
-router.get('/redirectgoogle', GoogleRedirect.login);
+router.get('/redirectgoogle', GoogleLogin.login);
 router.post('/signin', Signin.post);
 router.post('/signup', Signup.post);
 router.post('/signout', Signout.post);
