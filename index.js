@@ -12,6 +12,60 @@ const feedRouter = require('./routes/feed');
 const alarmRouter = require('./routes/alarm');
 const followRouter = require('./routes/follow')
 
+
+//test google
+const { google } = require('googleapis');
+var googleClient = require('../im22project5-server/config/google.json');
+ 
+const googleConfig = {
+  clientId: googleClient.web.client_id,
+  clientSecret: googleClient.web.client_secret,
+  redirect: googleClient.web.redirect_uris[0]
+};
+ 
+const oauth2Client =new google.auth.OAuth2(
+  googleConfig.clientId,
+  googleConfig.clientSecret,
+  googleConfig.redirect
+);
+
+const url = oauth2Client.generateAuthUrl({
+  access_type:'offline',  
+  scope: 'https://www.googleapis.com/auth/plus.me'
+});
+ 
+function getGooglePlusApi(auth) {
+  return google.plus({ version:'v1', auth });
+}
+
+async function googleLogin(code) {
+  const { tokens } = await oauth2Client.getToken(code);
+  oauth2Client.setCredentials(tokens);
+  oauth2Client.on('tokens', (token) => {
+    if(tokens.refresh_token){
+      console.log("리프레시 토큰 :", tokens.refresh_token);
+    }
+    console.log("액세스 토큰:", tokens.access_token);
+  });
+  const plus = getGooglePlusApi(oauth2Client);
+  const res = await plus.people.get({ userId:'me' });
+  console.log(`Hello ${res.data.displayName}! ${res.data.id}`);
+  return res.data.displayName;
+}
+
+app.get('/login',function (req, res) {
+  res.redirect(url);
+});
+ 
+app.get("/auth/google/callback", async function (req, res) {
+ 
+  const displayName = await googleLogin(req.query.code);
+  console.log(displayName);
+ 
+  res.redirect("http://get-up-mate.s3-website.ap-northeast-2.amazonaws.com");
+});
+
+
 //test session sustain
 const mysqlStore = require('express-mysql-session')(session);
 const options = {
@@ -46,7 +100,7 @@ app.use('/mission', missionRouter);
 app.use('/user', userRouter);
 app.use('/alarm', alarmRouter);
 app.use('/feed', feedRouter);
-app.use("/auth", require("./routes/user"));
+// app.use("/auth", require("./routes/user"));
 app.use('/upload', express.static(__dirname+'/uploads/images'));
 app.use('/img', express.static(__dirname+'/uploads/images'));
 dotenv.config();
