@@ -12,6 +12,7 @@ const feedRouter = require('./routes/feed');
 const alarmRouter = require('./routes/alarm');
 const followRouter = require('./routes/follow')
 
+
 //test session sustain
 const mysqlStore = require('express-mysql-session')(session);
 const options = {
@@ -25,7 +26,9 @@ const sessionStorage = new mysqlStore(options);
 
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors( { origin : '*' } ));
+app.use(cors({
+  origin : "*"
+}));
 app.use(
   session({
     secret: "getupmate",
@@ -46,7 +49,7 @@ app.use('/mission', missionRouter);
 app.use('/user', userRouter);
 app.use('/alarm', alarmRouter);
 app.use('/feed', feedRouter);
-app.use("/auth", require("./routes/user"));
+// app.use("/auth", require("./routes/user"));
 app.use('/upload', express.static(__dirname+'/uploads/images'));
 app.use('/img', express.static(__dirname+'/uploads/images'));
 dotenv.config();
@@ -68,3 +71,4 @@ app.listen(port, () => {
 })
 
 module.exports = app;
+
