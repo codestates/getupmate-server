@@ -22,6 +22,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 //add controller
+const GoogleLogin = require('../controller/user/googlelogin');
 const Signin = require('../controller/user/signin');
 const Signout = require('../controller/user/signout');
 const Signup = require('../controller/user/signup');
@@ -29,6 +30,7 @@ const SearchUser = require('../controller/user/searchuser');
 const ChangePhoto = require('../controller/user/changephoto');
 const ChangeNickname = require('../controller/user/changenickname');
 
+router.post('/googleLogin', GoogleLogin.login);
 router.post('/signin', Signin.post);
 router.post('/signup', Signup.post);
 router.post('/signout', Signout.post);
